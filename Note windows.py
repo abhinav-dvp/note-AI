@@ -1,14 +1,13 @@
 import speech_recognition as sr
 import pyttsx3
 r = sr.Recognizer()
-def main():
-    try:
-        
+def speech_to_text():
+    try:       
         with sr.Microphone() as mic:
-            f = open('note.txt','a+')
-            r.adjust_for_ambient_noise(mic,duration = 2)
-            audio = r.listen(mic)
+            f = open('note0.txt','a+')
+            r.adjust_for_ambient_noise(mic,duration = 1.3)
             print("Listining")
+            audio = r.listen(mic)   
             text = r.recognize_google(audio)
             text = text.lower()       
             if 'stop' in text :
@@ -19,13 +18,11 @@ def main():
                 L = text + '.'+'\n'
                 f.write(L)
                 f.close()
-                print("running the program again)")
-                main()
+                print("running the program again")
+                speech_to_text()
     except sr.UnknownValueError():
-
-        r = sr.Recognizer()
-        main()
-main()
+        speech_to_text()
+speech_to_text()
         
         
         
